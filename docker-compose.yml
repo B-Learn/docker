@@ -16,10 +16,7 @@ services:
     container_name: web
     build:
       context: ./
-      dockerfile: ./Dockerfile
-    environment:
-      PHP_XDEBUG_REMOTE_PORT: "${PHP_XDEBUG_REMOTE_PORT}"
-      PHP_XDEBUG_REMOTE_HOST: "${PHP_XDEBUG_REMOTE_HOST}"
+      dockerfile: ./node-conf/Dockerfile
     volumes:
       - ${WEB_PATH}:/app
     ports:
