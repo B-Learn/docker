@@ -1,4 +1,4 @@
-FROM php:7.4.10-fpm
+FROM php:8.0.3-fpm
 
 # SYSTEM PACKAGES
 RUN apt-get update && apt-get install -y \
@@ -48,15 +48,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && ln -s $(composer config --global home) /root/composer
 ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
 
-#
-# Install Node (with NPM), and Yarn (via package manager for Debian)
-#
-# https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-RUN apt-get update \
- && apt-get install -y \
- nodejs
-
 # PHP RUNTIME
 WORKDIR /app
 RUN chown -R www-data:www-data /app
@@ -80,6 +71,5 @@ COPY conf/supervisord.conf /docker/conf/supervisord.conf
 USER www-data
 
 EXPOSE 8080
-
 
 ENTRYPOINT [ "/entrypoint.sh" ]
