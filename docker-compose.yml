@@ -12,6 +12,8 @@ services:
       - ${CORE_PATH}:/app
     ports:
       - "5000:8080"
+    depends_on:
+      - mysql
   web:
     container_name: web
     build:
